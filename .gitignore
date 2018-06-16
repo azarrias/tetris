@@ -328,3 +328,39 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+
+# Eclipse project files
+.project
+
+# Eclipse settings folder
+.settings/
+
+# Eclipse CDT
+.cproject
+.autotools
+
+# VS project and solution files
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
+# Executables
+*.exe
+*.out
+*.app
+[Dd]ebug*/
+[Rr]elease*/
+[Bb]in/
+
+# CMake
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+build/
