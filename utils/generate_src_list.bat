@@ -7,7 +7,7 @@
 ::================================================================================
 @echo off
 
-set V_PROJECT=pong
+set V_PROJECT=tetris
 set V_CMAKELISTS_PATH="../src/CMakeLists.txt"
 for %%F in (%V_CMAKELISTS_PATH%) do set SRC_RELATIVE_PATH=%%~dpF
 

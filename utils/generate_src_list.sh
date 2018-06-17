@@ -7,7 +7,7 @@
 # Usage:        ./generate_src_list.sh
 #================================================================================
 
-V_PROJECT="pong"
+V_PROJECT="tetris"
 V_CMAKELISTS_PATH="../src/CMakeLists.txt"
 IFS='
 '
