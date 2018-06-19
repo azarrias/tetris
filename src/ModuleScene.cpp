@@ -26,7 +26,7 @@ bool ModuleScene::CleanUp()
 
 bool ModuleScene::Init()
 {
-	Start();
+
 	return true;
 }
 

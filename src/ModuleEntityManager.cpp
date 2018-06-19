@@ -56,7 +56,7 @@ GameObject* ModuleEntityManager::CreateGameObject(GameObjectType type, int xPos,
 	GameObject* go = nullptr;
 	switch (type) {
 		case GameObjectType::TETROMINO:
-			go = new Tetromino(xPos, yPos, width, height);
+			go = new Tetromino(TetrominoType::J, xPos, yPos, width, height);
 			break;
 		case GameObjectType::UNKNOWN:
 			go = new GameObject(GameObjectType::UNKNOWN, xPos, yPos, width, height);

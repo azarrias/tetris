@@ -8,13 +8,65 @@
 #include "Globals.h"
 #include "Tetromino.h"
 
-Tetromino::Tetromino()
-: GameObject()
-{}
+const std::map<int, SDL_Color> Tetromino::mColorDict = {
+	{ TetrominoType::I, { 0xFF, 0x00, 0x00, 0xFF } }, // Red
+    { TetrominoType::J, { 0xFF, 0xFF, 0xFF, 0xFF } }, // White
+	{ TetrominoType::L, { 0xFF, 0x00, 0xFF, 0xFF } }, // Magenta
+	{ TetrominoType::O, { 0x00, 0x00, 0xFF, 0xFF } }, // Blue
+	{ TetrominoType::S, { 0x00, 0xFF, 0x00, 0xFF } }, // Green
+    { TetrominoType::T, { 0xA5, 0x2A, 0x2A, 0xFF } }, // Brown
+    { TetrominoType::Z, { 0x00, 0xFF, 0xFF, 0xFF } }  // Cyan
+};
 
-Tetromino::Tetromino(int xPos, int yPos, int width, int height)
+Tetromino::Tetromino(TetrominoType type, int xPos, int yPos, int width, int height)
 : GameObject(GameObjectType::TETROMINO, xPos, yPos, width, height)
-{}
+{
+	switch (type)
+	{
+	case TetrominoType::I:
+		mShape.push_back({ 0, 0, 1, 0 });
+		mShape.push_back({ 0, 0, 1, 0 });
+		mShape.push_back({ 0, 0, 1, 0 });
+		mShape.push_back({ 0, 0, 1, 0 });
+		break;
+	case TetrominoType::J:
+		mShape.push_back({ 0, 0, 1, 0 });
+		mShape.push_back({ 0, 0, 1, 0 });
+		mShape.push_back({ 0, 1, 1, 0 });
+		mShape.push_back({ 0, 0, 0, 0 });
+		break;
+	case TetrominoType::L:
+		mShape.push_back({ 0, 1, 0, 0 });
+		mShape.push_back({ 0, 1, 0, 0 });
+		mShape.push_back({ 0, 1, 1, 0 });
+		mShape.push_back({ 0, 0, 0, 0 });
+		break;
+	case TetrominoType::O:
+		mShape.push_back({ 0, 0, 0, 0 });
+		mShape.push_back({ 0, 1, 1, 0 });
+		mShape.push_back({ 0, 1, 1, 0 });
+		mShape.push_back({ 0, 0, 0, 0 });
+		break;
+	case TetrominoType::S:
+		mShape.push_back({ 0, 1, 0, 0 });
+		mShape.push_back({ 0, 1, 1, 0 });
+		mShape.push_back({ 0, 0, 1, 0 });
+		mShape.push_back({ 0, 0, 0, 0 });
+		break;
+	case TetrominoType::T:
+		mShape.push_back({ 0, 1, 0, 0 });
+		mShape.push_back({ 0, 1, 1, 0 });
+		mShape.push_back({ 0, 0, 1, 0 });
+		mShape.push_back({ 0, 0, 0, 0 });
+		break;
+	case TetrominoType::Z:
+		mShape.push_back({ 0, 0, 1, 0 });
+		mShape.push_back({ 0, 1, 1, 0 });
+		mShape.push_back({ 0, 1, 0, 0 });
+		mShape.push_back({ 0, 0, 0, 0 });
+		break;
+	}
+}
 
 Tetromino::~Tetromino()
 {}
