@@ -12,27 +12,29 @@
 #include <map>
 #include <vector>
 
-enum TetrominoType
+enum CellType
 {
-	I,
-	O,
-	T,
-	S,
-	Z,
-	J,
-	L,
-	NR_OF_TETROMINO_TYPES
+	NO_TETROMINO,
+	TETROMINO_I,
+	TETROMINO_O,
+	TETROMINO_T,
+	TETROMINO_S,
+	TETROMINO_Z,
+	TETROMINO_J,
+	TETROMINO_L,
+	NR_OF_CELL_TYPES
 };
 
 class Tetromino : public GameObject
 {
 public:
-	Tetromino(TetrominoType type, int xPos, int yPos, int width, int height);
+	Tetromino(CellType type, int xPos, int yPos, int width, int height);
 	~Tetromino() override;
 
 	void UpdatePos() override;
 
-	std::vector<std::vector<int>> mShape;
+	std::vector<SDL_Point> mCoord;
+//	std::vector<std::vector<int>> mShape;
 
 private:
 	static const std::map<int, SDL_Color> mColorDict;
