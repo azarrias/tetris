@@ -9,16 +9,16 @@
 #include "Tetromino.h"
 
 const std::map<int, SDL_Color> Tetromino::mColorDict = {
-	{ CellType::TETROMINO_I, { 0xFF, 0x00, 0x00, 0xFF } }, // Red
-    { CellType::TETROMINO_J, { 0xFF, 0xFF, 0xFF, 0xFF } }, // White
-	{ CellType::TETROMINO_L, { 0xFF, 0x00, 0xFF, 0xFF } }, // Magenta
-	{ CellType::TETROMINO_O, { 0x00, 0x00, 0xFF, 0xFF } }, // Blue
-	{ CellType::TETROMINO_S, { 0x00, 0xFF, 0x00, 0xFF } }, // Green
-    { CellType::TETROMINO_T, { 0xA5, 0x2A, 0x2A, 0xFF } }, // Brown
-    { CellType::TETROMINO_Z, { 0x00, 0xFF, 0xFF, 0xFF } }  // Cyan
+	{ TetrominoType::TETROMINO_I, { 0xFF, 0x00, 0x00, 0xFF } }, // Red
+    { TetrominoType::TETROMINO_J, { 0xFF, 0xFF, 0xFF, 0xFF } }, // White
+	{ TetrominoType::TETROMINO_L, { 0xFF, 0x00, 0xFF, 0xFF } }, // Magenta
+	{ TetrominoType::TETROMINO_O, { 0x00, 0x00, 0xFF, 0xFF } }, // Blue
+	{ TetrominoType::TETROMINO_S, { 0x00, 0xFF, 0x00, 0xFF } }, // Green
+    { TetrominoType::TETROMINO_T, { 0xA5, 0x2A, 0x2A, 0xFF } }, // Brown
+    { TetrominoType::TETROMINO_Z, { 0x00, 0xFF, 0xFF, 0xFF } }  // Cyan
 };
 
-Tetromino::Tetromino(CellType type, int xPos, int yPos, int width, int height)
+Tetromino::Tetromino(TetrominoType type, int xPos, int yPos, int width, int height)
 : GameObject(GameObjectType::TETROMINO, xPos, yPos, width, height)
 {
 	/* X,Y coordinates and indexes that define tetromino shapes
@@ -34,41 +34,26 @@ Tetromino::Tetromino(CellType type, int xPos, int yPos, int width, int height)
 
 	switch (type)
 	{
-	case CellType::TETROMINO_I:
+	case TetrominoType::TETROMINO_I:
 		mCoord = { { 2, 0 }, { 2, 1 }, { 2, 2 }, { 2, 3 } };
 		break;
-	case CellType::TETROMINO_J:
+	case TetrominoType::TETROMINO_J:
 		mCoord = { { 2, 0 }, { 2, 1 }, { 2, 2 }, { 1, 2 } };
 		break;
-	case CellType::TETROMINO_L:
-		mShape.push_back({ 0, 1, 0, 0 });
-		mShape.push_back({ 0, 1, 0, 0 });
-		mShape.push_back({ 0, 1, 1, 0 });
-		mShape.push_back({ 0, 0, 0, 0 });
+	case TetrominoType::TETROMINO_L:
+		mCoord = { { 1, 0 }, { 1, 1 }, { 1, 2 }, { 2, 2 } };
 		break;
-	case CellType::TETROMINO_O:
-		mShape.push_back({ 0, 0, 0, 0 });
-		mShape.push_back({ 0, 1, 1, 0 });
-		mShape.push_back({ 0, 1, 1, 0 });
-		mShape.push_back({ 0, 0, 0, 0 });
+	case TetrominoType::TETROMINO_O:
+		mCoord = { { 1, 1 }, { 2, 1 }, { 1, 2 }, { 2, 2 } };
 		break;
-	case CellType::TETROMINO_S:
-		mShape.push_back({ 0, 1, 0, 0 });
-		mShape.push_back({ 0, 1, 1, 0 });
-		mShape.push_back({ 0, 0, 1, 0 });
-		mShape.push_back({ 0, 0, 0, 0 });
+	case TetrominoType::TETROMINO_S:
+		mCoord = { { 1, 0 }, { 1, 1 }, { 2, 1 }, { 2, 2 } };
 		break;
-	case CellType::TETROMINO_T:
-		mShape.push_back({ 0, 1, 0, 0 });
-		mShape.push_back({ 0, 1, 1, 0 });
-		mShape.push_back({ 0, 0, 1, 0 });
-		mShape.push_back({ 0, 0, 0, 0 });
+	case TetrominoType::TETROMINO_T:
+		mCoord = { { 1, 1 }, { 2, 0 }, { 2, 1 }, { 2, 2 } };
 		break;
-	case CellType::TETROMINO_Z:
-		mShape.push_back({ 0, 0, 1, 0 });
-		mShape.push_back({ 0, 1, 1, 0 });
-		mShape.push_back({ 0, 1, 0, 0 });
-		mShape.push_back({ 0, 0, 0, 0 });
+	case TetrominoType::TETROMINO_Z:
+		mCoord = { { 2, 0 }, { 1, 1 }, { 2, 1 }, { 1, 2 } };
 		break;
 	}
 }
