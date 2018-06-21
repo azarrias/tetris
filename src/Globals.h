@@ -8,13 +8,20 @@
 #ifndef GLOBALS_H_
 #define GLOBALS_H_
 
+#include <cmath>
 #include <string>
 
 class GameManager;
 
 // Game setup constants
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 600;
+const int SCREEN_WIDTH = 1280;
+const int SCREEN_HEIGHT = 720;
+const int BOARD_CELLS_X = 10;
+const int BOARD_CELLS_Y = 20;
+const int SCREEN_CELLS_Y = 22;
+const int CELL_SIDE_SIZE = static_cast<int>(std::floor(SCREEN_HEIGHT / SCREEN_CELLS_Y));
+const int BOARD_WIDTH = CELL_SIDE_SIZE * BOARD_CELLS_X;
+const int BOARD_HEIGHT = CELL_SIDE_SIZE * BOARD_CELLS_Y;
 const int PADDLE_BORDER_OFFSET = 20;
 const int PADDLE_HEIGHT = 100;
 const int PADDLE_WIDTH = 20;

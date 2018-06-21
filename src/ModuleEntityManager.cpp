@@ -11,24 +11,7 @@
 
 ModuleEntityManager::ModuleEntityManager()
 {
-/*	mPlayerOnePaddle = dynamic_cast<Paddle*>(CreateGameObject(GameObjectType::PADDLE,
-		PADDLE_BORDER_OFFSET,
-		SCREEN_HEIGHT / 2 - PADDLE_HEIGHT / 2,
-		PADDLE_WIDTH,
-		PADDLE_HEIGHT));
-
-	mPlayerTwoPaddle = dynamic_cast<Paddle*>(CreateGameObject(GameObjectType::PADDLE,
-		SCREEN_WIDTH - PADDLE_BORDER_OFFSET - PADDLE_WIDTH,
-		SCREEN_HEIGHT / 2 - PADDLE_HEIGHT / 2,
-		PADDLE_WIDTH,
-		PADDLE_HEIGHT));
-
-	mBall = dynamic_cast<Ball*>(CreateGameObject(GameObjectType::BALL,
-		SCREEN_WIDTH / 2 - BALL_WIDTH / 2,
-		SCREEN_HEIGHT / 2 - BALL_HEIGHT / 2,
-		BALL_WIDTH,
-		BALL_HEIGHT));*/
-
+	// TODO - Move to scene
 	mPlayingTetromino = dynamic_cast<Tetromino*>(CreateGameObject(GameObjectType::TETROMINO,
 		SCREEN_WIDTH / 2 - BALL_WIDTH / 2,
 		SCREEN_HEIGHT / 2 - BALL_HEIGHT / 2,

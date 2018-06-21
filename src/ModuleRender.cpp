@@ -54,6 +54,15 @@ bool ModuleRender::CleanUp()
 	SDL_RenderCopy(mRenderer, texture, nullptr, &rect);
 }*/
 
+void ModuleRender::DrawBoard() const
+{
+	// TODO - This board_rect should be a member of the scene
+	SDL_Rect board_rect = { SCREEN_WIDTH / 2 - BOARD_WIDTH / 2, SCREEN_HEIGHT / 2 - BOARD_HEIGHT / 2, BOARD_WIDTH, BOARD_HEIGHT };
+	// Set render color to black and render all objects
+	SDL_SetRenderDrawColor(mRenderer, 0x00, 0x00, 0x00, 0xFF);
+	SDL_RenderFillRect(mRenderer, &board_rect);
+}
+
 bool ModuleRender::Init()
 {
 	// Create vsynced renderer for window
@@ -69,12 +78,14 @@ bool ModuleRender::Init()
 
 bool ModuleRender::Update()
 {
-	// Set background render color to black and clear window
-	SDL_SetRenderDrawColor(mRenderer, 0x00, 0x00, 0x00, 0xFF);
+	// Set background render color to grey and clear window
+	SDL_SetRenderDrawColor(mRenderer, 0xA9, 0xA9, 0xA9, 0xFF);
 	SDL_RenderClear(mRenderer);
 
+	DrawBoard();
+
 	// Set render color to white and render all objects
-	SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+//	SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 	// TODO: Draw tetrominos
 //	SDL_RenderFillRect(mRenderer, game->mEntities->mPlayerOnePaddle->GetRect());
 //	SDL_RenderFillRect(mRenderer, game->mEntities->mPlayerTwoPaddle->GetRect());

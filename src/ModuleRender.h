@@ -21,6 +21,7 @@ public:
 
 	bool CleanUp();
 //	void DrawScore(int score, bool isLeftPlayer) const;
+	void DrawBoard() const;
 	bool Init();
 	bool Update();
 
