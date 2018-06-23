@@ -30,6 +30,8 @@ Tetromino::Tetromino(TetrominoType type, int xIndex, int yIndex)
 	 * 2 |  8  9 10 11
 	 * 3 | 12 13 14 15
 	 *
+	 * TODO - This works ok for I and O
+	 * But use 3x3 coordinates for the rest of the pieces for a more natural rotation
 	 */
 
 	switch (type)
@@ -69,6 +71,15 @@ const SDL_Color& Tetromino::GetColor(const int type)
 TetrominoType Tetromino::GetType() const
 {
 	return mType;
+}
+
+void Tetromino::Rotate()
+{
+	for (SDL_Point &coord : mCoord)
+	{
+		std::swap(coord.x, coord.y);
+		coord.y = 3 - coord.y;
+	}
 }
 
 void Tetromino::UpdatePos()

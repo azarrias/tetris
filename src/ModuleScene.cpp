@@ -40,11 +40,11 @@ void ModuleScene::SpawnTetromino()
 
 bool ModuleScene::Update()
 {
-    // Update board
-	for (SDL_Point coord : mPlayingTetromino->mCoord)
+    // TODO - Update board with tetrominos once they become still
+/*	for (SDL_Point coord : mPlayingTetromino->mCoord)
 	{
 		game->mScene->mBoard[mPlayingTetromino->mX + coord.x][mPlayingTetromino->mY + coord.y] = mPlayingTetromino->GetType();
-	}
+	}*/
 
 	return true;
 }

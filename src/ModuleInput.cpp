@@ -10,7 +10,9 @@
 #include "Globals.h"
 //#include "ModuleEntityManager.h"
 #include "ModuleInput.h"
+#include "ModuleScene.h"
 #include <SDL2/SDL.h>
+#include "Tetromino.h"
 
 ModuleInput::ModuleInput()
 {
@@ -53,6 +55,7 @@ bool ModuleInput::Update()
 				// Player 1
 				case SDLK_w:
 					// Rotate
+					game->mScene->mPlayingTetromino->Rotate();
 					//game->mEntities->mPlayerOnePaddle->mVelocity.mY -= PADDLE_VELOCITY_DELTA;
 					break;
 				case SDLK_s:

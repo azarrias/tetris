@@ -33,6 +33,7 @@ public:
 
 	static const SDL_Color& GetColor(const int type);
 	TetrominoType GetType() const;
+	void Rotate();
 	void UpdatePos();
 
     static const std::map<int, SDL_Color> mColorDict;

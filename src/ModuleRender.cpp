@@ -81,6 +81,24 @@ void ModuleRender::DrawBoard() const
 	}
 }
 
+void ModuleRender::DrawTetromino() const
+{
+	Tetromino *t = game->mScene->mPlayingTetromino;
+	SDL_Color color = Tetromino::GetColor(t->GetType());
+	SDL_SetRenderDrawColor(mRenderer, color.r, color.g, color.b, color.a);
+
+	for (SDL_Point coord : t->mCoord)
+	{
+		SDL_Rect rect;
+		rect.x = game->mScene->mBoardRect.x + t->mX * CELL_SIDE_SIZE + coord.x * CELL_SIDE_SIZE;
+		rect.y = game->mScene->mBoardRect.y + t->mY * CELL_SIDE_SIZE + coord.y * CELL_SIDE_SIZE;
+		rect.w = CELL_SIDE_SIZE;
+		rect.h = CELL_SIDE_SIZE;
+
+		SDL_RenderFillRect(mRenderer, &rect);
+	}
+}
+
 bool ModuleRender::Init()
 {
 	// Create vsynced renderer for window
@@ -101,6 +119,7 @@ bool ModuleRender::Update()
 	SDL_RenderClear(mRenderer);
 
 	DrawBoard();
+	DrawTetromino();
 	
 	// Set render color to white and render all objects
 //	SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
