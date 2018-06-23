@@ -38,6 +38,7 @@ public:
 
     static const std::map<int, SDL_Color> mColorDict;
 	std::vector<SDL_Point> mCoord;
+	int mMatrixSize;
 	int mY;
 	int mX;
 

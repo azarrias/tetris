@@ -21,7 +21,7 @@ const std::map<int, SDL_Color> Tetromino::mColorDict = {
 Tetromino::Tetromino(TetrominoType type, int xIndex, int yIndex)
 	: mType(type), mX(xIndex), mY(yIndex)
 {
-	/* X,Y coordinates and indexes that define tetromino shapes
+	/* X,Y coordinates and indexes that define tetromino shapes I and O
 	 * 
 	 *      0  1  2  3 
 	 *   +-------------
@@ -30,32 +30,44 @@ Tetromino::Tetromino(TetrominoType type, int xIndex, int yIndex)
 	 * 2 |  8  9 10 11
 	 * 3 | 12 13 14 15
 	 *
-	 * TODO - This works ok for I and O
-	 * But use 3x3 coordinates for the rest of the pieces for a more natural rotation
+	 * For the other shapes, the rotation will feel more natural with a 3x3 matrix:
+	 *
+	 *      0  1  2 
+	 *   +----------
+	 * 0 |  0  1  2 
+	 * 1 |  3  4  5 
+	 * 2 |  6  7  8 
 	 */
 
 	switch (type)
 	{
 	case TetrominoType::TETROMINO_I:
 		mCoord = { { 2, 0 }, { 2, 1 }, { 2, 2 }, { 2, 3 } };
+		mMatrixSize = 4;
 		break;
 	case TetrominoType::TETROMINO_J:
-		mCoord = { { 2, 0 }, { 2, 1 }, { 2, 2 }, { 1, 2 } };
+		mCoord = { { 1, 0 }, { 2, 0 }, { 1, 1 }, { 1, 2 } };
+		mMatrixSize = 3;
 		break;
 	case TetrominoType::TETROMINO_L:
 		mCoord = { { 1, 0 }, { 1, 1 }, { 1, 2 }, { 2, 2 } };
+		mMatrixSize = 3;
 		break;
 	case TetrominoType::TETROMINO_O:
 		mCoord = { { 1, 1 }, { 2, 1 }, { 1, 2 }, { 2, 2 } };
+		mMatrixSize = 4;
 		break;
 	case TetrominoType::TETROMINO_S:
 		mCoord = { { 1, 0 }, { 1, 1 }, { 2, 1 }, { 2, 2 } };
+		mMatrixSize = 3;
 		break;
 	case TetrominoType::TETROMINO_T:
-		mCoord = { { 1, 1 }, { 2, 0 }, { 2, 1 }, { 2, 2 } };
+		mCoord = { { 1, 0 }, { 1, 1 }, { 2, 1 }, { 1, 2 } };
+		mMatrixSize = 3;
 		break;
 	case TetrominoType::TETROMINO_Z:
 		mCoord = { { 2, 0 }, { 1, 1 }, { 2, 1 }, { 1, 2 } };
+		mMatrixSize = 3;
 		break;
 	}
 }
@@ -78,7 +90,7 @@ void Tetromino::Rotate()
 	for (SDL_Point &coord : mCoord)
 	{
 		std::swap(coord.x, coord.y);
-		coord.y = 3 - coord.y;
+		coord.y = mMatrixSize - 1 - coord.y;
 	}
 }
 
