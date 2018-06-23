@@ -35,7 +35,7 @@ bool ModuleScene::Init()
 
 void ModuleScene::SpawnTetromino()
 {
-	mPlayingTetromino = new Tetromino(TetrominoType::TETROMINO_J, 3, 0);
+	mPlayingTetromino = new Tetromino(static_cast<TetrominoType>(Random::GetRandom<int>(TetrominoType::TETROMINO_FIRST, TetrominoType::TETROMINO_LAST)), 3, 0);
 }
 
 bool ModuleScene::Update()
