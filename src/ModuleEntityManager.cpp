@@ -6,7 +6,6 @@
  */
 
 #include "GameManager.h"
-#include "GameObject.h"
 #include "Globals.h"
 #include "ModuleEntityManager.h"
 #include "ModuleScene.h"

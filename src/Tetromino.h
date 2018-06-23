@@ -8,8 +8,8 @@
 #ifndef TETROMINO_H_
 #define TETROMINO_H_
 
-#include "GameObject.h"
 #include <map>
+#include <SDL2/SDL.h>
 #include <vector>
 
 enum TetrominoType

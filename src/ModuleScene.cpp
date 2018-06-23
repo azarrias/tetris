@@ -7,7 +7,6 @@
 
 #include <cmath>
 #include "GameManager.h"
-#include "GameObject.h"
 #include "Globals.h"
 #include "ModuleEntityManager.h"
 #include "ModuleScene.h"
@@ -45,4 +44,3 @@ bool ModuleScene::Update()
 
 	return true;
 }
-
