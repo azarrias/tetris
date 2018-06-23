@@ -8,6 +8,8 @@
 #ifndef MODULESCENE_H_
 #define MODULESCENE_H_
 
+#include <vector>
+
 class ModuleScene : public Module
 {
 public:
@@ -20,6 +22,9 @@ public:
 
 	int mPlayerOneScore = 0;
 	int mPlayerTwoScore = 0;
+
+	std::vector<std::vector<int>> mBoard;
+	SDL_Rect mBoardRect;
 };
 
 #endif /* MODULESCENE_H_ */

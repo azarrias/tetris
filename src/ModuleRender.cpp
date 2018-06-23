@@ -15,6 +15,7 @@
 #include "ModuleScene.h"
 #include "ModuleWindow.h"
 #include <SDL2/SDL.h>
+#include <vector>
 
 ModuleRender::ModuleRender()
 {}
@@ -56,11 +57,29 @@ bool ModuleRender::CleanUp()
 
 void ModuleRender::DrawBoard() const
 {
-	// TODO - This board_rect should be a member of the scene
-	SDL_Rect board_rect = { SCREEN_WIDTH / 2 - BOARD_WIDTH / 2, SCREEN_HEIGHT / 2 - BOARD_HEIGHT / 2, BOARD_WIDTH, BOARD_HEIGHT };
-	// Set render color to black and render all objects
+	// Set render color to black and render board
 	SDL_SetRenderDrawColor(mRenderer, 0x00, 0x00, 0x00, 0xFF);
-	SDL_RenderFillRect(mRenderer, &board_rect);
+	SDL_RenderFillRect(mRenderer, &game->mScene->mBoardRect);
+
+	// Render all tetromino squares in the board
+	for (size_t i = 0; i < game->mScene->mBoard.size(); ++i)
+	{
+		for (size_t j = 0; j < game->mScene->mBoard[i].size(); ++j)
+		{
+			if (game->mScene->mBoard[i][j] != 0)
+			{
+				SDL_Rect rect;
+				rect.x = game->mScene->mBoardRect.x + i * CELL_SIDE_SIZE;
+				rect.y = game->mScene->mBoardRect.y + j * CELL_SIDE_SIZE;
+				rect.w = CELL_SIDE_SIZE;
+				rect.h = CELL_SIDE_SIZE;
+
+				SDL_Color color = Tetromino::GetColor(game->mScene->mBoard[i][j]);
+				SDL_SetRenderDrawColor(mRenderer, color.r, color.g, color.b, color.a);
+				SDL_RenderFillRect(mRenderer, &rect);
+			}
+		}
+	}
 }
 
 bool ModuleRender::Init()
@@ -83,7 +102,7 @@ bool ModuleRender::Update()
 	SDL_RenderClear(mRenderer);
 
 	DrawBoard();
-
+	
 	// Set render color to white and render all objects
 //	SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 	// TODO: Draw tetrominos

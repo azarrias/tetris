@@ -25,18 +25,23 @@ enum TetrominoType
 	TETROMINO_LAST = TETROMINO_L
 };
 
-class Tetromino : public GameObject
+class Tetromino
 {
 public:
-	Tetromino(TetrominoType type, int xPos, int yPos, int width, int height);
-	~Tetromino() override;
+	Tetromino(TetrominoType type, int xIndex, int yIndex);
+	~Tetromino();
 
-	void UpdatePos() override;
+	static const SDL_Color& GetColor(const int type);
+	TetrominoType GetType() const;
+	void UpdatePos();
 
+    static const std::map<int, SDL_Color> mColorDict;
 	std::vector<SDL_Point> mCoord;
+	int mY;
+	int mX;
 
 private:
-	static const std::map<int, SDL_Color> mColorDict;
+	TetrominoType mType;
 };
 
 #endif /* TETROMINO_H_ */

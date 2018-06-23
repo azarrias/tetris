@@ -18,8 +18,8 @@ const std::map<int, SDL_Color> Tetromino::mColorDict = {
     { TetrominoType::TETROMINO_Z, { 0x00, 0xFF, 0xFF, 0xFF } }  // Cyan
 };
 
-Tetromino::Tetromino(TetrominoType type, int xPos, int yPos, int width, int height)
-: GameObject(GameObjectType::TETROMINO, xPos, yPos, width, height)
+Tetromino::Tetromino(TetrominoType type, int xIndex, int yIndex)
+	: mType(type), mX(xIndex), mY(yIndex)
 {
 	/* X,Y coordinates and indexes that define tetromino shapes
 	 * 
@@ -61,9 +61,19 @@ Tetromino::Tetromino(TetrominoType type, int xPos, int yPos, int width, int heig
 Tetromino::~Tetromino()
 {}
 
+const SDL_Color& Tetromino::GetColor(const int type)
+{
+	return Tetromino::mColorDict.at(type);
+}
+
+TetrominoType Tetromino::GetType() const
+{
+	return mType;
+}
+
 void Tetromino::UpdatePos()
 {
-    mRect.x += mVelocity.mX;
+/*    mRect.x += mVelocity.mX;
 	if (mRect.x < 0 || mRect.x + mRect.w > SCREEN_WIDTH)
 	{
 		mRect.x -= mVelocity.mX;
@@ -73,5 +83,5 @@ void Tetromino::UpdatePos()
 	if (mRect.y < 0 || mRect.y + mRect.h > SCREEN_HEIGHT)
 	{
 		mRect.y -= mVelocity.mY;
-	}
+	}*/
 }

@@ -22,14 +22,12 @@ public:
 	~ModuleEntityManager();
 
 	bool CleanUp();
-	GameObject* CreateGameObject(GameObjectType type, int xPos, int yPos, int width, int height);
+	Tetromino* CreateTetromino(int xIndex, int yIndex);
 	bool Init();
 	bool Update();
 
+	std::vector<Tetromino*> mTetrominoes;
 	Tetromino *mPlayingTetromino;
-
-private:
-	std::vector<GameObject*> mEntities;
 };
 
 #endif /* MODULEENTITYMANAGER_H_ */
