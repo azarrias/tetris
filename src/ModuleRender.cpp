@@ -8,12 +8,12 @@
 #include "GameManager.h"
 #include "Globals.h"
 #include <iostream>
-#include "ModuleEntityManager.h"
 //#include "ModuleGUI.h"
 #include "ModuleRender.h"
 #include "ModuleScene.h"
 #include "ModuleWindow.h"
 #include <SDL2/SDL.h>
+#include "Tetromino.h"
 #include <vector>
 
 ModuleRender::ModuleRender()

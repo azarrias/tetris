@@ -8,7 +8,10 @@
 #ifndef MODULESCENE_H_
 #define MODULESCENE_H_
 
+#include <SDL2/SDL.h>
 #include <vector>
+
+class Tetromino;
 
 class ModuleScene : public Module
 {
@@ -18,13 +21,15 @@ public:
 
 	bool CleanUp();
 	bool Init();
-	bool Update();
+	void SpawnTetromino();
+	bool Update(); 
 
 	int mPlayerOneScore = 0;
 	int mPlayerTwoScore = 0;
 
 	std::vector<std::vector<int>> mBoard;
 	SDL_Rect mBoardRect;
+	Tetromino *mPlayingTetromino;
 };
 
 #endif /* MODULESCENE_H_ */
