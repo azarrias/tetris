@@ -5,8 +5,11 @@
  *      Author: adolfo
  */
 
+#include "GameManager.h"
 #include "Globals.h"
+#include "ModuleScene.h"
 #include "Tetromino.h"
+#include <vector>
 
 const std::map<int, SDL_Color> Tetromino::mColorDict = {
 	{ TetrominoType::TETROMINO_I, { 0xFF, 0x00, 0x00, 0xFF } }, // Red
@@ -87,27 +90,45 @@ TetrominoType Tetromino::GetType() const
 
 void Tetromino::Move(int dx, int dy)
 {
-	mX += dx;
-	mY += dy;
+	// Check for requested new positions
+	int mNewX(mX), mNewY(mY);
+
+	mNewX += dx;
+	mNewY += dy;
 
 	for (SDL_Point coord : mCoord)
 	{
+		if (mNewX + coord.x < 0 || mNewX + coord.x > BOARD_CELLS_X - 1 ||
+			game->mScene->mBoard[mNewX + coord.x][mNewY + coord.y] != 0)
+			return;
+	}
+
+	// If the new coordinates are available, move the piece
+	mX = mNewX;
+	mY = mNewY;
+}
+
+void Tetromino::Rotate()
+{
+	// Check for requested new coordinates
+	std::vector<SDL_Point> newCoords(mCoord);
+
+	for (SDL_Point &coord : newCoords)
+	{
+		std::swap(coord.x, coord.y);
+		coord.y = mMatrixSize - 1 - coord.y;
+
+		// Do this just to keep the tetromino within bounds
 		while (mX + coord.x < 0)
 			mX += 1;
 
 		while (mX + coord.x > BOARD_CELLS_X - 1)
 			mX -= 1;
-	}
-}
 
-void Tetromino::Rotate()
-{
-	for (SDL_Point &coord : mCoord)
-	{
-		std::swap(coord.x, coord.y);
-		coord.y = mMatrixSize - 1 - coord.y;
+		if (game->mScene->mBoard[mX + coord.x][mY + coord.y] != 0)
+			return;
 	}
 
-	// Do this just to keep the tetromino within bounds
-	Move(0, 0);
+	// If they are available, we can rotate the piece
+	mCoord = newCoords;
 }
