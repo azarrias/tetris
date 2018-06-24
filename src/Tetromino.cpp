@@ -85,22 +85,19 @@ TetrominoType Tetromino::GetType() const
 	return mType;
 }
 
-bool Tetromino::Move(int dx, int dy)
+void Tetromino::Move(int dx, int dy)
 {
 	mX += dx;
 	mY += dy;
 
 	for (SDL_Point coord : mCoord)
 	{
-		if (mX + coord.x < 0 || mX + coord.x > BOARD_CELLS_X - 1)
-		{
-			mX -= dx;
-			mY -= dy;
-			return false;
-		}
-	}
+		while (mX + coord.x < 0)
+			mX += 1;
 
-	return true;
+		while (mX + coord.x > BOARD_CELLS_X - 1)
+			mX -= 1;
+	}
 }
 
 void Tetromino::Rotate()
@@ -110,4 +107,7 @@ void Tetromino::Rotate()
 		std::swap(coord.x, coord.y);
 		coord.y = mMatrixSize - 1 - coord.y;
 	}
+
+	// Do this just to keep the tetromino within bounds
+	Move(0, 0);
 }
