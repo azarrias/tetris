@@ -29,7 +29,7 @@ bool ModuleScene::CleanUp()
 
 bool ModuleScene::Init()
 {
-
+	mTimer.reset();
 	return true;
 }
 
@@ -40,6 +40,11 @@ void ModuleScene::SpawnTetromino()
 
 bool ModuleScene::Update()
 {
+	if (mTimer.getDelta() >= 750)
+	{
+		mPlayingTetromino->Move(0, 1);
+		mTimer.reset();
+	}
     // TODO - Update board with tetrominos once they become still
 /*	for (SDL_Point coord : mPlayingTetromino->mCoord)
 	{

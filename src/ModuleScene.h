@@ -9,6 +9,7 @@
 #define MODULESCENE_H_
 
 #include <SDL2/SDL.h>
+#include "SimpleTimer.h"
 #include <vector>
 
 class Tetromino;
@@ -30,6 +31,7 @@ public:
 	std::vector<std::vector<int>> mBoard;
 	SDL_Rect mBoardRect;
 	Tetromino *mPlayingTetromino;
+	SimpleTimer mTimer;
 };
 
 #endif /* MODULESCENE_H_ */

@@ -98,8 +98,13 @@ void Tetromino::Move(int dx, int dy)
 
 	for (SDL_Point coord : mCoord)
 	{
-		if (mNewX + coord.x < 0 || mNewX + coord.x > BOARD_CELLS_X - 1 ||
-			game->mScene->mBoard[mNewX + coord.x][mNewY + coord.y] != 0)
+		if (mNewX + coord.x < 0 || mNewX + coord.x > BOARD_CELLS_X - 1)
+			return;
+		
+		if (mNewY + coord.y > BOARD_CELLS_Y - 1)
+			return;
+		
+		if (game->mScene->mBoard[mNewY + coord.y][mNewX + coord.x] != 0)
 			return;
 	}
 
@@ -125,7 +130,7 @@ void Tetromino::Rotate()
 		while (mX + coord.x > BOARD_CELLS_X - 1)
 			mX -= 1;
 
-		if (game->mScene->mBoard[mX + coord.x][mY + coord.y] != 0)
+		if (game->mScene->mBoard[mY + coord.y][mX + coord.x] != 0)
 			return;
 	}
 
