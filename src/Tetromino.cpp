@@ -102,10 +102,22 @@ void Tetromino::Move(int dx, int dy)
 			return;
 		
 		if (mNewY + coord.y > BOARD_CELLS_Y - 1)
+		{
+			game->mScene->LockCurrentTetromino();
+			game->mScene->SpawnTetromino();
 			return;
+		}
 		
 		if (game->mScene->mBoard[mNewY + coord.y][mNewX + coord.x] != 0)
+		{
+			if (dy != 0)
+			{
+				game->mScene->LockCurrentTetromino();
+				game->mScene->SpawnTetromino();
+			}
+
 			return;
+		}
 	}
 
 	// If the new coordinates are available, move the piece

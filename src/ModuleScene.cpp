@@ -33,6 +33,14 @@ bool ModuleScene::Init()
 	return true;
 }
 
+void ModuleScene::LockCurrentTetromino()
+{
+	for (SDL_Point coord : mPlayingTetromino->mCoord)
+	{
+		game->mScene->mBoard[mPlayingTetromino->mY + coord.y][mPlayingTetromino->mX + coord.x] = mPlayingTetromino->GetType();
+	}
+}
+
 void ModuleScene::SpawnTetromino()
 {
 	mPlayingTetromino = new Tetromino(static_cast<TetrominoType>(Random::GetRandom<int>(TetrominoType::TETROMINO_FIRST, TetrominoType::TETROMINO_LAST)), 3, 0);
@@ -45,11 +53,6 @@ bool ModuleScene::Update()
 		mPlayingTetromino->Move(0, 1);
 		mTimer.reset();
 	}
-    // TODO - Update board with tetrominos once they become still
-/*	for (SDL_Point coord : mPlayingTetromino->mCoord)
-	{
-		game->mScene->mBoard[mPlayingTetromino->mX + coord.x][mPlayingTetromino->mY + coord.y] = mPlayingTetromino->GetType();
-	}*/
 
 	return true;
 }

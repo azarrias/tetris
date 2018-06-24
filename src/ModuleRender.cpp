@@ -68,8 +68,8 @@ void ModuleRender::DrawBoard() const
 			if (game->mScene->mBoard[i][j] != 0)
 			{
 				SDL_Rect rect;
-				rect.x = game->mScene->mBoardRect.x + i * CELL_SIDE_SIZE;
-				rect.y = game->mScene->mBoardRect.y + j * CELL_SIDE_SIZE;
+				rect.x = game->mScene->mBoardRect.x + j * CELL_SIDE_SIZE;
+				rect.y = game->mScene->mBoardRect.y + i * CELL_SIDE_SIZE;
 				rect.w = CELL_SIDE_SIZE;
 				rect.h = CELL_SIDE_SIZE;
 
