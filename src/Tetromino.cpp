@@ -85,6 +85,24 @@ TetrominoType Tetromino::GetType() const
 	return mType;
 }
 
+bool Tetromino::Move(int dx, int dy)
+{
+	mX += dx;
+	mY += dy;
+
+	for (SDL_Point coord : mCoord)
+	{
+		if (mX + coord.x < 0 || mX + coord.x > BOARD_CELLS_X - 1)
+		{
+			mX -= dx;
+			mY -= dy;
+			return false;
+		}
+	}
+
+	return true;
+}
+
 void Tetromino::Rotate()
 {
 	for (SDL_Point &coord : mCoord)
@@ -92,19 +110,4 @@ void Tetromino::Rotate()
 		std::swap(coord.x, coord.y);
 		coord.y = mMatrixSize - 1 - coord.y;
 	}
-}
-
-void Tetromino::UpdatePos()
-{
-/*    mRect.x += mVelocity.mX;
-	if (mRect.x < 0 || mRect.x + mRect.w > SCREEN_WIDTH)
-	{
-		mRect.x -= mVelocity.mX;
-	}
-
-	mRect.y += mVelocity.mY;
-	if (mRect.y < 0 || mRect.y + mRect.h > SCREEN_HEIGHT)
-	{
-		mRect.y -= mVelocity.mY;
-	}*/
 }

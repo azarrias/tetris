@@ -64,10 +64,12 @@ bool ModuleInput::Update()
 					break;
 				case SDLK_a:
 					// Left
+					game->mScene->mPlayingTetromino->Move(-1, 0);
 					//game->mEntities->mPlayerOnePaddle->mVelocity.mY += PADDLE_VELOCITY_DELTA;
 					break;
 				case SDLK_d:
 					// Right
+					game->mScene->mPlayingTetromino->Move(1, 0);
 					//game->mEntities->mPlayerOnePaddle->mVelocity.mY += PADDLE_VELOCITY_DELTA;
 					break;
 				// Player 2
