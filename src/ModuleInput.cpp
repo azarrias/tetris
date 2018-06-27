@@ -60,6 +60,7 @@ bool ModuleInput::Update()
 					break;
 				case SDLK_s:
 					// Down
+					game->mScene->mPlayingTetromino->Move(0, 1);
 					//game->mEntities->mPlayerOnePaddle->mVelocity.mY += PADDLE_VELOCITY_DELTA;
 					break;
 				case SDLK_a:

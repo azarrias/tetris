@@ -20,6 +20,7 @@ public:
 	ModuleScene();
 	~ModuleScene();
 
+	void CheckForLines();
 	bool CleanUp();
 	bool Init();
 	void LockCurrentTetromino();
