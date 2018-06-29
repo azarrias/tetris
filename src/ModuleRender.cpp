@@ -61,7 +61,7 @@ void ModuleRender::DrawBoard() const
 	SDL_RenderFillRect(mRenderer, &game->mScene->mBoardRect);
 
 	// Render all tetromino squares in the board
-	for (size_t i = 0; i < game->mScene->mBoard.size(); ++i)
+	for (size_t i = SPAWN_AREA_CELLS; i < game->mScene->mBoard.size(); ++i)
 	{
 		for (size_t j = 0; j < game->mScene->mBoard[i].size(); ++j)
 		{
@@ -69,7 +69,7 @@ void ModuleRender::DrawBoard() const
 			{
 				SDL_Rect rect;
 				rect.x = game->mScene->mBoardRect.x + j * CELL_SIDE_SIZE;
-				rect.y = game->mScene->mBoardRect.y + i * CELL_SIDE_SIZE;
+				rect.y = game->mScene->mBoardRect.y + (i - SPAWN_AREA_CELLS) * CELL_SIDE_SIZE;
 				rect.w = CELL_SIDE_SIZE;
 				rect.h = CELL_SIDE_SIZE;
 
@@ -89,13 +89,16 @@ void ModuleRender::DrawTetromino() const
 
 	for (SDL_Point coord : t->mCoord)
 	{
-		SDL_Rect rect;
-		rect.x = game->mScene->mBoardRect.x + t->mX * CELL_SIDE_SIZE + coord.x * CELL_SIDE_SIZE;
-		rect.y = game->mScene->mBoardRect.y + t->mY * CELL_SIDE_SIZE + coord.y * CELL_SIDE_SIZE;
-		rect.w = CELL_SIDE_SIZE;
-		rect.h = CELL_SIDE_SIZE;
+		if (t->mY + coord.y >= SPAWN_AREA_CELLS)
+		{
+			SDL_Rect rect;
+			rect.x = game->mScene->mBoardRect.x + t->mX * CELL_SIDE_SIZE + coord.x * CELL_SIDE_SIZE;
+			rect.y = game->mScene->mBoardRect.y + t->mY * CELL_SIDE_SIZE + (coord.y - SPAWN_AREA_CELLS) * CELL_SIDE_SIZE;
+			rect.w = CELL_SIDE_SIZE;
+			rect.h = CELL_SIDE_SIZE;
 
-		SDL_RenderFillRect(mRenderer, &rect);
+			SDL_RenderFillRect(mRenderer, &rect);
+		}
 	}
 }
 

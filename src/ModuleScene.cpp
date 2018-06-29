@@ -18,7 +18,7 @@
 ModuleScene::ModuleScene()
 {
 	mBoardRect = { SCREEN_WIDTH / 2 - BOARD_WIDTH / 2, SCREEN_HEIGHT / 2 - BOARD_HEIGHT / 2, BOARD_WIDTH, BOARD_HEIGHT };
-	mBoard = std::vector<std::vector<int>>(BOARD_CELLS_Y, std::vector<int>(BOARD_CELLS_X));
+	mBoard = std::vector<std::vector<int>>(BOARD_CELLS_Y + SPAWN_AREA_CELLS, std::vector<int>(BOARD_CELLS_X));
 	SpawnTetromino();
 }
 

@@ -101,7 +101,7 @@ void Tetromino::Move(int dx, int dy)
 		if (mNewX + coord.x < 0 || mNewX + coord.x > BOARD_CELLS_X - 1)
 			return;
 		
-		if (mNewY + coord.y > BOARD_CELLS_Y - 1)
+		if (mNewY + coord.y > game->mScene->mBoard.size() - 1)
 		{
 			game->mScene->LockCurrentTetromino();
 			game->mScene->CheckForLines();

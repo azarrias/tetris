@@ -14,11 +14,12 @@
 class GameManager;
 
 // Game setup constants
+const int SPAWN_AREA_CELLS = 4;
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 720;
 const int BOARD_CELLS_X = 10;
 const int BOARD_CELLS_Y = 20;
-const int SCREEN_CELLS_Y = 28;
+const int SCREEN_CELLS_Y = 24;
 const int CELL_SIDE_SIZE = static_cast<int>(std::floor(SCREEN_HEIGHT / SCREEN_CELLS_Y));
 const int BOARD_WIDTH = CELL_SIDE_SIZE * BOARD_CELLS_X;
 const int BOARD_HEIGHT = CELL_SIDE_SIZE * BOARD_CELLS_Y;
