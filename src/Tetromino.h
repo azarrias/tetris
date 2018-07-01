@@ -33,6 +33,7 @@ public:
 
 	static const SDL_Color& GetColor(const int type);
 	TetrominoType GetType() const;
+	void SetType(TetrominoType type);
 	void Move(int dx, int dy);
 	void Rotate();
 

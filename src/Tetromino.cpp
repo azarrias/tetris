@@ -22,57 +22,9 @@ const std::map<int, SDL_Color> Tetromino::mColorDict = {
 };
 
 Tetromino::Tetromino(TetrominoType type, int xIndex, int yIndex)
-	: mType(type), mX(xIndex), mY(yIndex)
+	: mX(xIndex), mY(yIndex)
 {
-	/* X,Y coordinates and indexes that define tetromino shapes I and O
-	 * 
-	 *      0  1  2  3 
-	 *   +-------------
-     * 0 |  0  1  2  3
-	 * 1 |  4  5  6  7
-	 * 2 |  8  9 10 11
-	 * 3 | 12 13 14 15
-	 *
-	 * For the other shapes, the rotation will feel more natural with a 3x3 matrix:
-	 *
-	 *      0  1  2 
-	 *   +----------
-	 * 0 |  0  1  2 
-	 * 1 |  3  4  5 
-	 * 2 |  6  7  8 
-	 */
-
-	switch (type)
-	{
-	case TetrominoType::TETROMINO_I:
-		mCoord = { { 2, 0 }, { 2, 1 }, { 2, 2 }, { 2, 3 } };
-		mMatrixSize = 4;
-		break;
-	case TetrominoType::TETROMINO_J:
-		mCoord = { { 1, 0 }, { 2, 0 }, { 1, 1 }, { 1, 2 } };
-		mMatrixSize = 3;
-		break;
-	case TetrominoType::TETROMINO_L:
-		mCoord = { { 1, 0 }, { 1, 1 }, { 1, 2 }, { 2, 2 } };
-		mMatrixSize = 3;
-		break;
-	case TetrominoType::TETROMINO_O:
-		mCoord = { { 1, 1 }, { 2, 1 }, { 1, 2 }, { 2, 2 } };
-		mMatrixSize = 4;
-		break;
-	case TetrominoType::TETROMINO_S:
-		mCoord = { { 1, 0 }, { 1, 1 }, { 2, 1 }, { 2, 2 } };
-		mMatrixSize = 3;
-		break;
-	case TetrominoType::TETROMINO_T:
-		mCoord = { { 1, 0 }, { 1, 1 }, { 2, 1 }, { 1, 2 } };
-		mMatrixSize = 3;
-		break;
-	case TetrominoType::TETROMINO_Z:
-		mCoord = { { 2, 0 }, { 1, 1 }, { 2, 1 }, { 1, 2 } };
-		mMatrixSize = 3;
-		break;
-	}
+	SetType(type);
 }
 
 Tetromino::~Tetromino()
@@ -86,6 +38,61 @@ const SDL_Color& Tetromino::GetColor(const int type)
 TetrominoType Tetromino::GetType() const
 {
 	return mType;
+}
+
+void Tetromino::SetType(TetrominoType type)
+{
+	/* X,Y coordinates and indexes that define tetromino shapes I and O
+	*
+	*      0  1  2  3
+	*   +-------------
+	* 0 |  0  1  2  3
+	* 1 |  4  5  6  7
+	* 2 |  8  9 10 11
+	* 3 | 12 13 14 15
+	*
+	* For the other shapes, the rotation will feel more natural with a 3x3 matrix:
+	*
+	*      0  1  2
+	*   +----------
+	* 0 |  0  1  2
+	* 1 |  3  4  5
+	* 2 |  6  7  8
+	*/
+
+	switch (type)
+	{
+	case TetrominoType::TETROMINO_I:
+		mCoord = { { 2, 0 },{ 2, 1 },{ 2, 2 },{ 2, 3 } };
+		mMatrixSize = 4;
+		break;
+	case TetrominoType::TETROMINO_J:
+		mCoord = { { 1, 0 },{ 2, 0 },{ 1, 1 },{ 1, 2 } };
+		mMatrixSize = 3;
+		break;
+	case TetrominoType::TETROMINO_L:
+		mCoord = { { 1, 0 },{ 1, 1 },{ 1, 2 },{ 2, 2 } };
+		mMatrixSize = 3;
+		break;
+	case TetrominoType::TETROMINO_O:
+		mCoord = { { 1, 1 },{ 2, 1 },{ 1, 2 },{ 2, 2 } };
+		mMatrixSize = 4;
+		break;
+	case TetrominoType::TETROMINO_S:
+		mCoord = { { 1, 0 },{ 1, 1 },{ 2, 1 },{ 2, 2 } };
+		mMatrixSize = 3;
+		break;
+	case TetrominoType::TETROMINO_T:
+		mCoord = { { 1, 0 },{ 1, 1 },{ 2, 1 },{ 1, 2 } };
+		mMatrixSize = 3;
+		break;
+	case TetrominoType::TETROMINO_Z:
+		mCoord = { { 2, 0 },{ 1, 1 },{ 2, 1 },{ 1, 2 } };
+		mMatrixSize = 3;
+		break;
+	}
+
+	mType = type;
 }
 
 void Tetromino::Move(int dx, int dy)

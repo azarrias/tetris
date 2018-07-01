@@ -19,7 +19,6 @@ ModuleScene::ModuleScene()
 {
 	mBoardRect = { SCREEN_WIDTH / 2 - BOARD_WIDTH / 2, SCREEN_HEIGHT / 2 - BOARD_HEIGHT / 2, BOARD_WIDTH, BOARD_HEIGHT };
 	mBoard = std::vector<std::vector<int>>(BOARD_CELLS_Y + SPAWN_AREA_CELLS, std::vector<int>(BOARD_CELLS_X));
-	SpawnTetromino();
 }
 
 ModuleScene::~ModuleScene()
@@ -65,12 +64,19 @@ void ModuleScene::CheckForLines()
 
 bool ModuleScene::CleanUp()
 {
+	if (mPlayingTetromino)
+	{
+		delete mPlayingTetromino;
+		mPlayingTetromino = nullptr;
+	}
+
 	return true;
 }
 
 bool ModuleScene::Init()
 {
 	mTimer.reset();
+	mPlayingTetromino = new Tetromino(static_cast<TetrominoType>(Random::GetRandom<int>(TetrominoType::TETROMINO_FIRST, TetrominoType::TETROMINO_LAST)), 3, 0);
 	return true;
 }
 
@@ -84,8 +90,9 @@ void ModuleScene::LockCurrentTetromino()
 
 void ModuleScene::SpawnTetromino()
 {
-	// TODO - Should reset it instead of allocating for a new one
-	mPlayingTetromino = new Tetromino(static_cast<TetrominoType>(Random::GetRandom<int>(TetrominoType::TETROMINO_FIRST, TetrominoType::TETROMINO_LAST)), 3, 0);
+	mPlayingTetromino->SetType(static_cast<TetrominoType>(Random::GetRandom<int>(TetrominoType::TETROMINO_FIRST, TetrominoType::TETROMINO_LAST)));
+	mPlayingTetromino->mX = 3;
+	mPlayingTetromino->mY = 0;
 }
 
 bool ModuleScene::Update()
