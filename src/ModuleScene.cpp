@@ -76,7 +76,7 @@ bool ModuleScene::CleanUp()
 bool ModuleScene::Init()
 {
 	mTimer.reset();
-	mPlayingTetromino = new Tetromino(static_cast<TetrominoType>(Random::GetRandom<int>(TetrominoType::TETROMINO_FIRST, TetrominoType::TETROMINO_LAST)), 3, 0);
+	mPlayingTetromino = new Tetromino(static_cast<TetrominoType>(Random::GetRandom<int>(TetrominoType::TETROMINO_FIRST, TetrominoType::TETROMINO_LAST)), 3, 3);
 	return true;
 }
 
@@ -92,7 +92,7 @@ void ModuleScene::SpawnTetromino()
 {
 	mPlayingTetromino->SetType(static_cast<TetrominoType>(Random::GetRandom<int>(TetrominoType::TETROMINO_FIRST, TetrominoType::TETROMINO_LAST)));
 	mPlayingTetromino->mX = 3;
-	mPlayingTetromino->mY = 0;
+	mPlayingTetromino->mY = 2;
 }
 
 bool ModuleScene::Update()

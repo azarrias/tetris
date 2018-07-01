@@ -63,15 +63,15 @@ void Tetromino::SetType(TetrominoType type)
 	switch (type)
 	{
 	case TetrominoType::TETROMINO_I:
-		mCoord = { { 2, 0 },{ 2, 1 },{ 2, 2 },{ 2, 3 } };
+		mCoord = { { 0, 1 },{ 1, 1 },{ 2, 1 },{ 3, 1 } };
 		mMatrixSize = 4;
 		break;
 	case TetrominoType::TETROMINO_J:
-		mCoord = { { 1, 0 },{ 2, 0 },{ 1, 1 },{ 1, 2 } };
+		mCoord = { { 0, 1 },{ 0, 2 },{ 1, 2 },{ 2, 2 } };
 		mMatrixSize = 3;
 		break;
 	case TetrominoType::TETROMINO_L:
-		mCoord = { { 1, 0 },{ 1, 1 },{ 1, 2 },{ 2, 2 } };
+		mCoord = { { 0, 2 },{ 1, 2 },{ 2, 2 },{ 2, 1 } };
 		mMatrixSize = 3;
 		break;
 	case TetrominoType::TETROMINO_O:
@@ -79,15 +79,15 @@ void Tetromino::SetType(TetrominoType type)
 		mMatrixSize = 4;
 		break;
 	case TetrominoType::TETROMINO_S:
-		mCoord = { { 1, 0 },{ 1, 1 },{ 2, 1 },{ 2, 2 } };
+		mCoord = { { 0, 2 },{ 1, 2 },{ 1, 1 },{ 2, 1 } };
 		mMatrixSize = 3;
 		break;
 	case TetrominoType::TETROMINO_T:
-		mCoord = { { 1, 0 },{ 1, 1 },{ 2, 1 },{ 1, 2 } };
+		mCoord = { { 0, 2 },{ 1, 2 },{ 1, 1 },{ 2, 2 } };
 		mMatrixSize = 3;
 		break;
 	case TetrominoType::TETROMINO_Z:
-		mCoord = { { 2, 0 },{ 1, 1 },{ 2, 1 },{ 1, 2 } };
+		mCoord = { { 0, 1 },{ 1, 1 },{ 1, 2 },{ 2, 2 } };
 		mMatrixSize = 3;
 		break;
 	}
