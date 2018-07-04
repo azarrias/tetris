@@ -18,7 +18,6 @@
 ModuleScene::ModuleScene()
 {
 	mBoardRect = { SCREEN_WIDTH / 2 - BOARD_WIDTH / 2, SCREEN_HEIGHT / 2 - BOARD_HEIGHT / 2, BOARD_WIDTH, BOARD_HEIGHT };
-	mBoard = std::vector<std::vector<int>>(BOARD_CELLS_Y + SPAWN_AREA_CELLS, std::vector<int>(BOARD_CELLS_X));
 }
 
 ModuleScene::~ModuleScene()
@@ -75,6 +74,7 @@ bool ModuleScene::CleanUp()
 
 bool ModuleScene::Init()
 {
+	mBoard = std::vector<std::vector<int>>(BOARD_CELLS_Y + SPAWN_AREA_CELLS, std::vector<int>(BOARD_CELLS_X));
 	mTimer.reset();
 	mPlayingTetromino = new Tetromino(static_cast<TetrominoType>(Random::GetRandom<int>(TetrominoType::TETROMINO_FIRST, TetrominoType::TETROMINO_LAST)), 3, 3);
 	return true;
@@ -93,13 +93,34 @@ void ModuleScene::SpawnTetromino()
 	mPlayingTetromino->SetType(static_cast<TetrominoType>(Random::GetRandom<int>(TetrominoType::TETROMINO_FIRST, TetrominoType::TETROMINO_LAST)));
 	mPlayingTetromino->mX = 3;
 	mPlayingTetromino->mY = 2;
+
+	// If no existing block is in the tetromino's path, immediately drop one space, otherwise game over
+	if(mPlayingTetromino->IsCollisionFree(0, 1))
+	{
+		mPlayingTetromino->Move(0, 1);
+	}
+	else
+	{
+		// TODO - Add game over screen
+		Init();
+	}
 }
 
 bool ModuleScene::Update()
 {
 	if (mTimer.getDelta() >= 750)
 	{
-		mPlayingTetromino->Move(0, 1);
+		if (mPlayingTetromino->IsAboveGround(1) && mPlayingTetromino->IsCollisionFree(0, 1))
+		{
+			mPlayingTetromino->Move(0, 1);
+		}
+		else
+		{
+			game->mScene->LockCurrentTetromino();
+			game->mScene->CheckForLines();
+			game->mScene->SpawnTetromino();
+		}
+
 		mTimer.reset();
 	}
 

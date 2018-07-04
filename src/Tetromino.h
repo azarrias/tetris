@@ -35,6 +35,9 @@ public:
 	TetrominoType GetType() const;
 	void SetType(TetrominoType type);
 	void Move(int dx, int dy);
+	bool IsAboveGround(int dy);
+	bool IsInbounds(int dx);
+	bool IsCollisionFree(int dx, int dy);
 	void Rotate();
 
     static const std::map<int, SDL_Color> mColorDict;

@@ -97,41 +97,52 @@ void Tetromino::SetType(TetrominoType type)
 
 void Tetromino::Move(int dx, int dy)
 {
-	// Check for requested new positions
-	int mNewX(mX), mNewY(mY);
+	mX += dx;
+	mY += dy;
+}
 
-	mNewX += dx;
-	mNewY += dy;
-
+bool Tetromino::IsInbounds(int dx)
+{
+	const int mNewX = mX + dx;
+	
 	for (SDL_Point coord : mCoord)
 	{
 		if (mNewX + coord.x < 0 || mNewX + coord.x > BOARD_CELLS_X - 1)
-			return;
-		
+			return false;
+	}
+
+	return true;
+}
+
+bool Tetromino::IsAboveGround(int dy)
+{
+	const int mNewY = mY + dy;
+
+	for (SDL_Point coord : mCoord)
+	{
 		if (mNewY + coord.y > game->mScene->mBoard.size() - 1)
 		{
-			game->mScene->LockCurrentTetromino();
-			game->mScene->CheckForLines();
-			game->mScene->SpawnTetromino();
-			return;
-		}
-		
-		if (game->mScene->mBoard[mNewY + coord.y][mNewX + coord.x] != 0)
-		{
-			if (dy != 0)
-			{
-				game->mScene->LockCurrentTetromino();
-				game->mScene->CheckForLines();
-				game->mScene->SpawnTetromino();
-			}
-
-			return;
+			return false;
 		}
 	}
 
-	// If the new coordinates are available, move the piece
-	mX = mNewX;
-	mY = mNewY;
+	return true;
+}
+
+bool Tetromino::IsCollisionFree(int dx, int dy)
+{
+	const int mNewX = mX + dx;
+	const int mNewY = mY + dy;
+
+	for (SDL_Point coord : mCoord)
+	{
+		if (game->mScene->mBoard[mNewY + coord.y][mNewX + coord.x] != 0)
+		{
+			return false;
+		}
+	}
+
+	return true;
 }
 
 void Tetromino::Rotate()

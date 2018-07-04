@@ -47,6 +47,8 @@ bool ModuleInput::Update()
 
 		if(e.type == SDL_KEYDOWN && e.key.repeat == 0)
 		{
+			Tetromino* playingTetromino = game->mScene->mPlayingTetromino;
+
 			switch(e.key.keysym.sym)
 			{
 				case SDLK_ESCAPE:
@@ -55,23 +57,35 @@ bool ModuleInput::Update()
 				// Player 1
 				case SDLK_w:
 					// Rotate
-					game->mScene->mPlayingTetromino->Rotate();
+					playingTetromino->Rotate();
 					//game->mEntities->mPlayerOnePaddle->mVelocity.mY -= PADDLE_VELOCITY_DELTA;
 					break;
 				case SDLK_s:
 					// Down
-					game->mScene->mPlayingTetromino->Move(0, 1);
-					//game->mEntities->mPlayerOnePaddle->mVelocity.mY += PADDLE_VELOCITY_DELTA;
+					if (playingTetromino->IsAboveGround(1) && playingTetromino->IsCollisionFree(0, 1))
+					{
+						playingTetromino->Move(0, 1);
+					}
+					else
+					{
+						game->mScene->LockCurrentTetromino();
+						game->mScene->CheckForLines();
+						game->mScene->SpawnTetromino();
+					}
 					break;
 				case SDLK_a:
 					// Left
-					game->mScene->mPlayingTetromino->Move(-1, 0);
-					//game->mEntities->mPlayerOnePaddle->mVelocity.mY += PADDLE_VELOCITY_DELTA;
+					if (playingTetromino->IsInbounds(-1) && playingTetromino->IsCollisionFree(-1, 0))
+					{
+						playingTetromino->Move(-1, 0);
+					}
 					break;
 				case SDLK_d:
 					// Right
-					game->mScene->mPlayingTetromino->Move(1, 0);
-					//game->mEntities->mPlayerOnePaddle->mVelocity.mY += PADDLE_VELOCITY_DELTA;
+					if (playingTetromino->IsInbounds(1) && playingTetromino->IsCollisionFree(1, 0))
+					{
+						playingTetromino->Move(1, 0);
+					}
 					break;
 				// Player 2
 				case SDLK_UP:
