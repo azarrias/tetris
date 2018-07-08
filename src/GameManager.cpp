@@ -11,13 +11,13 @@
 //#include "ModuleGUI.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
 #include "ModuleWindow.h"
 
 GameManager::GameManager()
 {
 //	mModules.push_back(mEntities = new ModuleEntityManager());
-	mModules.push_back(mScene = new ModuleScene());
+	mModules.push_back(mScene = new ModuleSceneManager());
 	mModules.push_back(mWindow = new ModuleWindow());
 	mModules.push_back(mRenderer = new ModuleRender());
 //	mModules.push_back(mGUI = new ModuleGUI());

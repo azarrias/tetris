@@ -1,5 +1,5 @@
 /*
- * ModuleScene.cpp
+ * ModuleSceneManager.cpp
  *
  *  Created on: May 28, 2018
  *      Author: adolfo
@@ -9,21 +9,21 @@
 #include <cmath>
 #include "GameManager.h"
 #include "Globals.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
 #include "Random.h"
 #include <unordered_set>
 #include <set>
 #include "Tetromino.h"
 
-ModuleScene::ModuleScene()
+ModuleSceneManager::ModuleSceneManager()
 {
 	mBoardRect = { SCREEN_WIDTH / 2 - BOARD_WIDTH / 2, SCREEN_HEIGHT / 2 - BOARD_HEIGHT / 2, BOARD_WIDTH, BOARD_HEIGHT };
 }
 
-ModuleScene::~ModuleScene()
+ModuleSceneManager::~ModuleSceneManager()
 {}
 
-void ModuleScene::CheckForLines()
+void ModuleSceneManager::CheckForLines()
 {
 	// Keep record of what Y coordinates have been checked for lines
 	std::unordered_set<int> checked_coord_y;
@@ -61,7 +61,7 @@ void ModuleScene::CheckForLines()
 	}
 }
 
-bool ModuleScene::CleanUp()
+bool ModuleSceneManager::CleanUp()
 {
 	if (mPlayingTetromino)
 	{
@@ -72,7 +72,7 @@ bool ModuleScene::CleanUp()
 	return true;
 }
 
-bool ModuleScene::Init()
+bool ModuleSceneManager::Init()
 {
 	mBoard = std::vector<std::vector<int>>(BOARD_CELLS_Y + SPAWN_AREA_CELLS, std::vector<int>(BOARD_CELLS_X));
 	mTimer.reset();
@@ -80,7 +80,7 @@ bool ModuleScene::Init()
 	return true;
 }
 
-void ModuleScene::LockCurrentTetromino()
+void ModuleSceneManager::LockCurrentTetromino()
 {
 	for (SDL_Point coord : mPlayingTetromino->mCoord)
 	{
@@ -88,7 +88,7 @@ void ModuleScene::LockCurrentTetromino()
 	}
 }
 
-void ModuleScene::SpawnTetromino()
+void ModuleSceneManager::SpawnTetromino()
 {
 	mPlayingTetromino->SetType(static_cast<TetrominoType>(Random::GetRandom<int>(TetrominoType::TETROMINO_FIRST, TetrominoType::TETROMINO_LAST)));
 	mPlayingTetromino->mX = 3;
@@ -106,7 +106,7 @@ void ModuleScene::SpawnTetromino()
 	}
 }
 
-bool ModuleScene::Update()
+bool ModuleSceneManager::Update()
 {
 	if (mTimer.getDelta() >= 750)
 	{

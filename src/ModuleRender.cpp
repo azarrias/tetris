@@ -10,7 +10,7 @@
 #include <iostream>
 //#include "ModuleGUI.h"
 #include "ModuleRender.h"
-#include "ModuleScene.h"
+#include "ModuleSceneManager.h"
 #include "ModuleWindow.h"
 #include <SDL2/SDL.h>
 #include "Tetromino.h"

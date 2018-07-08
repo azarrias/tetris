@@ -5,8 +5,8 @@
  *      Author: adolfo
  */
 
-#ifndef MODULESCENE_H_
-#define MODULESCENE_H_
+#ifndef MODULESCENEMANAGER_H_
+#define MODULESCENEMANAGER_H_
 
 #include <SDL2/SDL.h>
 #include "SimpleTimer.h"
@@ -14,11 +14,11 @@
 
 class Tetromino;
 
-class ModuleScene : public Module
+class ModuleSceneManager : public Module
 {
 public:
-	ModuleScene();
-	~ModuleScene();
+	ModuleSceneManager();
+	~ModuleSceneManager();
 
 	void CheckForLines();
 	bool CleanUp();
@@ -36,4 +36,4 @@ public:
 	SimpleTimer mTimer;
 };
 
-#endif /* MODULESCENE_H_ */
+#endif /* MODULESCENEMANAGER_H_ */

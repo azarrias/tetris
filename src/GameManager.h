@@ -16,7 +16,7 @@ class ModuleEntityManager;
 class ModuleGUI;
 class ModuleInput;
 class ModuleRender;
-class ModuleScene;
+class ModuleSceneManager;
 class ModuleWindow;
 
 class GameManager
@@ -33,7 +33,7 @@ public:
 	ModuleGUI *mGUI = nullptr;
 	ModuleInput *mInput = nullptr;
 	ModuleRender *mRenderer = nullptr;
-	ModuleScene *mScene = nullptr;
+	ModuleSceneManager *mScene = nullptr;
 	ModuleWindow *mWindow = nullptr;
 private:
 	std::list<Module*> mModules;
