@@ -8,11 +8,12 @@ target_sources(tetris PRIVATE
    ${CMAKE_CURRENT_LIST_DIR}/ModuleInput.h
    ${CMAKE_CURRENT_LIST_DIR}/ModuleRender.cpp
    ${CMAKE_CURRENT_LIST_DIR}/ModuleRender.h
-   ${CMAKE_CURRENT_LIST_DIR}/ModuleScene.cpp
-   ${CMAKE_CURRENT_LIST_DIR}/ModuleScene.h
+   ${CMAKE_CURRENT_LIST_DIR}/ModuleSceneManager.cpp
+   ${CMAKE_CURRENT_LIST_DIR}/ModuleSceneManager.h
    ${CMAKE_CURRENT_LIST_DIR}/ModuleWindow.cpp
    ${CMAKE_CURRENT_LIST_DIR}/ModuleWindow.h
    ${CMAKE_CURRENT_LIST_DIR}/Random.h
+   ${CMAKE_CURRENT_LIST_DIR}/SimpleTimer.h
    ${CMAKE_CURRENT_LIST_DIR}/Tetromino.cpp
    ${CMAKE_CURRENT_LIST_DIR}/Tetromino.h
    ${CMAKE_CURRENT_LIST_DIR}/Vector2D.h
