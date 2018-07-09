@@ -6,6 +6,7 @@
  */
 
 #include "GameManager.h"
+#include "GameScene.h"
 #include "Globals.h"
 #include "ModuleSceneManager.h"
 #include "Tetromino.h"
@@ -21,8 +22,8 @@ const std::map<int, SDL_Color> Tetromino::mColorDict = {
     { TetrominoType::TETROMINO_Z, { 0x00, 0xFF, 0xFF, 0xFF } }  // Cyan
 };
 
-Tetromino::Tetromino(TetrominoType type, int xIndex, int yIndex)
-	: mX(xIndex), mY(yIndex)
+Tetromino::Tetromino(GameScene *gameScene, TetrominoType type, int xIndex, int yIndex)
+	: mScene(gameScene), mX(xIndex), mY(yIndex)
 {
 	SetType(type);
 }
@@ -120,7 +121,7 @@ bool Tetromino::IsAboveGround(int dy)
 
 	for (SDL_Point coord : mCoord)
 	{
-		if (mNewY + coord.y > game->mScene->mBoard.size() - 1)
+		if (mNewY + coord.y > mScene->mBoard.size() - 1)
 		{
 			return false;
 		}
@@ -136,7 +137,7 @@ bool Tetromino::IsCollisionFree(int dx, int dy)
 
 	for (SDL_Point coord : mCoord)
 	{
-		if (game->mScene->mBoard[mNewY + coord.y][mNewX + coord.x] != 0)
+		if (mScene->mBoard[mNewY + coord.y][mNewX + coord.x] != 0)
 		{
 			return false;
 		}
@@ -162,7 +163,7 @@ void Tetromino::Rotate()
 		while (mX + coord.x > BOARD_CELLS_X - 1)
 			mX -= 1;
 
-		if (game->mScene->mBoard[mY + coord.y][mX + coord.x] != 0)
+		if (mScene->mBoard[mY + coord.y][mX + coord.x] != 0)
 			return;
 	}
 

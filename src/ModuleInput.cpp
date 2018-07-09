@@ -6,6 +6,7 @@
  */
 
 #include "GameManager.h"
+#include "GameScene.h"
 //#include "GameObject.h"
 #include "Globals.h"
 //#include "ModuleEntityManager.h"
@@ -47,7 +48,8 @@ bool ModuleInput::Update()
 
 		if(e.type == SDL_KEYDOWN && e.key.repeat == 0)
 		{
-			Tetromino* playingTetromino = game->mScene->mPlayingTetromino;
+			GameScene *gameScene = static_cast<GameScene*>(game->mScene->mCurrentScene);
+			Tetromino *playingTetromino = gameScene->mPlayingTetromino;
 
 			switch(e.key.keysym.sym)
 			{
@@ -68,9 +70,9 @@ bool ModuleInput::Update()
 					}
 					else
 					{
-						game->mScene->LockCurrentTetromino();
-						game->mScene->CheckForLines();
-						game->mScene->SpawnTetromino();
+						gameScene->LockCurrentTetromino();
+						gameScene->CheckForLines();
+						gameScene->SpawnTetromino();
 					}
 					break;
 				case SDLK_a:

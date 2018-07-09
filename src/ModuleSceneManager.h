@@ -8,10 +8,12 @@
 #ifndef MODULESCENEMANAGER_H_
 #define MODULESCENEMANAGER_H_
 
+#include "Module.h"
 #include <SDL2/SDL.h>
 #include "SimpleTimer.h"
 #include <vector>
 
+class IScene;
 class Tetromino;
 
 class ModuleSceneManager : public Module
@@ -20,7 +22,11 @@ public:
 	ModuleSceneManager();
 	~ModuleSceneManager();
 
-	void CheckForLines();
+	bool CleanUp();
+	bool Init();
+	bool Update();
+
+/*	void CheckForLines();
 	bool CleanUp();
 	bool Init();
 	void LockCurrentTetromino();
@@ -28,12 +34,13 @@ public:
 	bool Update(); 
 
 	int mPlayerOneScore = 0;
-	int mPlayerTwoScore = 0;
+	int mPlayerTwoScore = 0;*/
 
-	std::vector<std::vector<int>> mBoard;
+/*	std::vector<std::vector<int>> mBoard;
 	SDL_Rect mBoardRect;
 	Tetromino *mPlayingTetromino;
-	SimpleTimer mTimer;
+	SimpleTimer mTimer;*/
+	IScene *mCurrentScene;
 };
 
 #endif /* MODULESCENEMANAGER_H_ */

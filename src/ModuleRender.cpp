@@ -6,6 +6,7 @@
  */
 
 #include "GameManager.h"
+#include "GameScene.h"
 #include "Globals.h"
 #include <iostream>
 //#include "ModuleGUI.h"
@@ -56,24 +57,26 @@ bool ModuleRender::CleanUp()
 
 void ModuleRender::DrawBoard() const
 {
+	GameScene *gameScene = static_cast<GameScene*>(game->mScene->mCurrentScene);
+
 	// Set render color to black and render board
 	SDL_SetRenderDrawColor(mRenderer, 0x00, 0x00, 0x00, 0xFF);
-	SDL_RenderFillRect(mRenderer, &game->mScene->mBoardRect);
+	SDL_RenderFillRect(mRenderer, &gameScene->mBoardRect);
 
 	// Render all tetromino squares in the board
-	for (size_t i = SPAWN_AREA_CELLS; i < game->mScene->mBoard.size(); ++i)
+	for (size_t i = SPAWN_AREA_CELLS; i < gameScene->mBoard.size(); ++i)
 	{
-		for (size_t j = 0; j < game->mScene->mBoard[i].size(); ++j)
+		for (size_t j = 0; j < gameScene->mBoard[i].size(); ++j)
 		{
-			if (game->mScene->mBoard[i][j] != 0)
+			if (gameScene->mBoard[i][j] != 0)
 			{
 				SDL_Rect rect;
-				rect.x = game->mScene->mBoardRect.x + j * CELL_SIDE_SIZE;
-				rect.y = game->mScene->mBoardRect.y + (i - SPAWN_AREA_CELLS) * CELL_SIDE_SIZE;
+				rect.x = gameScene->mBoardRect.x + j * CELL_SIDE_SIZE;
+				rect.y = gameScene->mBoardRect.y + (i - SPAWN_AREA_CELLS) * CELL_SIDE_SIZE;
 				rect.w = CELL_SIDE_SIZE;
 				rect.h = CELL_SIDE_SIZE;
 
-				SDL_Color color = Tetromino::GetColor(game->mScene->mBoard[i][j]);
+				SDL_Color color = Tetromino::GetColor(gameScene->mBoard[i][j]);
 				SDL_SetRenderDrawColor(mRenderer, color.r, color.g, color.b, color.a);
 				SDL_RenderFillRect(mRenderer, &rect);
 			}
@@ -83,7 +86,9 @@ void ModuleRender::DrawBoard() const
 
 void ModuleRender::DrawTetromino() const
 {
-	Tetromino *t = game->mScene->mPlayingTetromino;
+	GameScene *gameScene = static_cast<GameScene*>(game->mScene->mCurrentScene);
+
+	Tetromino *t = gameScene->mPlayingTetromino;
 	SDL_Color color = Tetromino::GetColor(t->GetType());
 	SDL_SetRenderDrawColor(mRenderer, color.r, color.g, color.b, color.a);
 
@@ -92,8 +97,8 @@ void ModuleRender::DrawTetromino() const
 		if (t->mY + coord.y >= SPAWN_AREA_CELLS)
 		{
 			SDL_Rect rect;
-			rect.x = game->mScene->mBoardRect.x + t->mX * CELL_SIDE_SIZE + coord.x * CELL_SIDE_SIZE;
-			rect.y = game->mScene->mBoardRect.y + t->mY * CELL_SIDE_SIZE + (coord.y - SPAWN_AREA_CELLS) * CELL_SIDE_SIZE;
+			rect.x = gameScene->mBoardRect.x + t->mX * CELL_SIDE_SIZE + coord.x * CELL_SIDE_SIZE;
+			rect.y = gameScene->mBoardRect.y + t->mY * CELL_SIDE_SIZE + (coord.y - SPAWN_AREA_CELLS) * CELL_SIDE_SIZE;
 			rect.w = CELL_SIDE_SIZE;
 			rect.h = CELL_SIDE_SIZE;
 

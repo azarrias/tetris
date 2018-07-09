@@ -28,7 +28,7 @@ enum TetrominoType
 class Tetromino
 {
 public:
-	Tetromino(TetrominoType type, int xIndex, int yIndex);
+	Tetromino(GameScene *gameScene, TetrominoType type, int xIndex, int yIndex);
 	~Tetromino();
 
 	static const SDL_Color& GetColor(const int type);
@@ -47,6 +47,7 @@ public:
 	int mX;
 
 private:
+	GameScene *mScene;
 	TetrominoType mType;
 };
 
