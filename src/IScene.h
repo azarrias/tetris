@@ -18,6 +18,9 @@ enum SceneType
 class IScene
 {
 public:
+	IScene(SceneType type)
+	: mType(type) {};
+
 	virtual bool CleanUp() = 0;
 	virtual bool Init() = 0;
 	virtual bool Update() = 0;

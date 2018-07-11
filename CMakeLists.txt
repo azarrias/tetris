@@ -13,5 +13,5 @@ set(CMAKE_CXX_EXTENSIONS False)
 add_executable(tetris "")
 include(src/CMakeLists.txt)
 
-target_include_directories(tetris PUBLIC ${SDL2_INCLUDE_DIRS})
-target_link_libraries(tetris PUBLIC ${SDL2_LIBRARIES})
+target_include_directories(tetris PUBLIC ${SDL2_INCLUDE_DIRS} PUBLIC ${SDL2_TTF_INCLUDE_DIRS})
+target_link_libraries(tetris PUBLIC ${SDL2_LIBRARIES} PUBLIC ${SDL2_TTF_LIBRARIES})

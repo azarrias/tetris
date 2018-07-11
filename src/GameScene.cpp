@@ -14,6 +14,7 @@
 #include <unordered_set>
 
 GameScene::GameScene()
+: IScene(SceneType::GAME_SCENE)
 {
 	mBoardRect = { SCREEN_WIDTH / 2 - BOARD_WIDTH / 2, SCREEN_HEIGHT / 2 - BOARD_HEIGHT / 2, BOARD_WIDTH, BOARD_HEIGHT };
 }

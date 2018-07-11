@@ -126,9 +126,12 @@ bool ModuleRender::Update()
 	SDL_SetRenderDrawColor(mRenderer, 0xA9, 0xA9, 0xA9, 0xFF);
 	SDL_RenderClear(mRenderer);
 
-	DrawBoard();
-	DrawTetromino();
-	
+	if (game->mScene->mCurrentScene->mType == SceneType::GAME_SCENE)
+	{
+		DrawBoard();
+		DrawTetromino();
+	}
+		
 	// Set render color to white and render all objects
 //	SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 	// TODO: Draw tetrominos

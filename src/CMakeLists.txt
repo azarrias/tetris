@@ -1,8 +1,13 @@
 target_sources(tetris PRIVATE
    ${CMAKE_CURRENT_LIST_DIR}/GameManager.cpp
    ${CMAKE_CURRENT_LIST_DIR}/GameManager.h
+   ${CMAKE_CURRENT_LIST_DIR}/GameScene.cpp
+   ${CMAKE_CURRENT_LIST_DIR}/GameScene.h
    ${CMAKE_CURRENT_LIST_DIR}/Globals.h
+   ${CMAKE_CURRENT_LIST_DIR}/IScene.h
    ${CMAKE_CURRENT_LIST_DIR}/Main.cpp
+   ${CMAKE_CURRENT_LIST_DIR}/MenuScene.cpp
+   ${CMAKE_CURRENT_LIST_DIR}/MenuScene.h
    ${CMAKE_CURRENT_LIST_DIR}/Module.h
    ${CMAKE_CURRENT_LIST_DIR}/ModuleInput.cpp
    ${CMAKE_CURRENT_LIST_DIR}/ModuleInput.h
