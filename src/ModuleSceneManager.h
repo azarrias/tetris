@@ -8,12 +8,12 @@
 #ifndef MODULESCENEMANAGER_H_
 #define MODULESCENEMANAGER_H_
 
+#include "IScene.h"
 #include "Module.h"
 #include <SDL2/SDL.h>
 #include "SimpleTimer.h"
 #include <vector>
 
-class IScene;
 class Tetromino;
 
 class ModuleSceneManager : public Module
@@ -23,6 +23,7 @@ public:
 	~ModuleSceneManager();
 
 	bool CleanUp();
+	IScene* CreateScene(SceneType type);
 	bool Init();
 	bool Update();
 
